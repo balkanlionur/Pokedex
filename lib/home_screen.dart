@@ -14,9 +14,11 @@ class HomeScreen extends StatefulWidget {
 
 class _MyWidgetState extends State<HomeScreen> {
   var pokeApi =
-      'https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json';
+      'https://raw.githubusercontent.com/balkanlionur/Pokedex/main/pokeapi.json';
 
   List pokedex = [];
+
+  Color _rcolor = Colors.transparent;
 
   @override
   void initState() {
@@ -34,6 +36,12 @@ class _MyWidgetState extends State<HomeScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 100),
+            child: Icon(Icons.catching_pokemon),
+          )
+        ],
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.black87,
@@ -45,9 +53,9 @@ class _MyWidgetState extends State<HomeScreen> {
         title: const Text(
           'Pokedex',
           style: TextStyle(
-            fontSize: 15,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
-            color: Colors.white38,
+            color: Colors.white60,
           ),
         ),
       ),
@@ -57,12 +65,12 @@ class _MyWidgetState extends State<HomeScreen> {
               top: -50,
               right: -50,
               child: Image.asset(
-                'asset/pokeball.png',
+                ProjectImage().pokeball,
                 width: 200,
                 fit: BoxFit.fitWidth,
               )),
           Positioned(
-            top: 150,
+            top: 50,
             bottom: 0,
             width: mediaWidth,
             child: Column(
@@ -84,45 +92,16 @@ class _MyWidgetState extends State<HomeScreen> {
                                     vertical: 8, horizontal: 12),
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      color: type == 'Grass'
-                                          ? Colors.greenAccent
-                                          : type == 'Fire'
-                                              ? Colors.redAccent
-                                              : type == 'Water'
-                                                  ? Colors.blueAccent
-                                                  : type == 'Electric'
-                                                      ? Colors.yellowAccent
-                                                      : type == 'Rock'
-                                                          ? Colors.grey
-                                                          : type == 'Ground'
-                                                              ? Colors.brown
-                                                              : type ==
-                                                                      'Psychic'
-                                                                  ? Colors
-                                                                      .indigo
-                                                                  : type ==
-                                                                          'Fighting'
-                                                                      ? Colors
-                                                                          .orange
-                                                                      : type ==
-                                                                              'Bug'
-                                                                          ? Colors
-                                                                              .lightGreenAccent
-                                                                          : type == 'Ghost'
-                                                                              ? Colors.deepPurple
-                                                                              : type == 'Normal'
-                                                                                  ? Colors.black26
-                                                                                  : type == 'Poison'
-                                                                                      ? Colors.deepPurpleAccent
-                                                                                      : Colors.pink,
-                                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                                      color: _colorback(type),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(20))),
                                   child: Stack(
                                     children: [
                                       Positioned(
                                         bottom: -10,
                                         right: -10,
                                         child: Image.asset(
-                                          'asset/pokeball.png',
+                                          ProjectImage().pokeball,
                                           height: 100,
                                           fit: BoxFit.fitHeight,
                                         ),
@@ -182,36 +161,7 @@ class _MyWidgetState extends State<HomeScreen> {
                                     MaterialPageRoute(
                                         builder: (_) => PokemonDetailScreen(
                                               pokemonDetail: pokedex[index],
-                                              color: type == 'Grass'
-                                                  ? Colors.greenAccent
-                                                  : type == 'Fire'
-                                                      ? Colors.redAccent
-                                                      : type == 'Water'
-                                                          ? Colors.blueAccent
-                                                          : type == 'Electric'
-                                                              ? Colors
-                                                                  .yellowAccent
-                                                              : type == 'Rock'
-                                                                  ? Colors.grey
-                                                                  : type ==
-                                                                          'Ground'
-                                                                      ? Colors
-                                                                          .brown
-                                                                      : type ==
-                                                                              'Psychic'
-                                                                          ? Colors
-                                                                              .indigo
-                                                                          : type == 'Fighting'
-                                                                              ? Colors.orange
-                                                                              : type == 'Bug'
-                                                                                  ? Colors.lightGreenAccent
-                                                                                  : type == 'Ghost'
-                                                                                      ? Colors.deepPurple
-                                                                                      : type == 'Normal'
-                                                                                          ? Colors.black26
-                                                                                          : type == 'Poison'
-                                                                                              ? Colors.deepPurpleAccent
-                                                                                              : Colors.pink,
+                                              color: _colorback(type),
                                               heroTag: index,
                                             )));
                               },
@@ -231,8 +181,8 @@ class _MyWidgetState extends State<HomeScreen> {
   }
 
   void fetchPokemonData() {
-    var url = Uri.http('raw.githubusercontent.com',
-        '/Biuni/PokemonGO-Pokedex/master/pokedex.json');
+    var url = Uri.http(
+        'raw.githubusercontent.com', '/balkanlionur/Pokedex/main/pokeapi.json');
     http.get(url).then((value) {
       if (value.statusCode == 200) {
         var decodedJsonData = jsonDecode(value.body);
@@ -243,4 +193,64 @@ class _MyWidgetState extends State<HomeScreen> {
       }
     });
   }
+
+  _colorback(type) {
+    switch (type) {
+
+//Colors.pink,
+
+      case 'Grass':
+        _rcolor = Colors.greenAccent;
+        break;
+
+      case 'Fire':
+        _rcolor = Colors.redAccent;
+        break;
+
+      case 'Water':
+        _rcolor = Colors.blueAccent;
+        break;
+
+      case 'Electric':
+        _rcolor = Colors.yellowAccent;
+        break;
+
+      case 'Rock':
+        _rcolor = Colors.grey;
+        break;
+
+      case 'Ground':
+        _rcolor = Colors.brown;
+        break;
+
+      case 'Psychic':
+        _rcolor = Colors.indigo;
+        break;
+
+      case 'Fighting':
+        _rcolor = Colors.orange;
+        break;
+
+      case 'Bug':
+        _rcolor = Colors.lightGreenAccent;
+        break;
+
+      case 'Ghost':
+        _rcolor = Colors.deepPurple;
+        break;
+
+      case 'Normal':
+        _rcolor = Colors.black26;
+        break;
+
+      case 'Poison':
+        _rcolor = Colors.deepPurpleAccent;
+        break;
+    }
+    return _rcolor;
+  }
+}
+
+class ProjectImage {
+  final pokeball = 'asset/pokeball.png';
 }

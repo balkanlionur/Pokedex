@@ -1,14 +1,17 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class PokemonDetailScreen extends StatefulWidget {
-  final pokemonDetail;
+  // ignore: prefer_typing_uninitialized_variables
+  dynamic pokemonDetail;
   final Color color;
   final int heroTag;
 
-  const PokemonDetailScreen(
+  PokemonDetailScreen(
       {super.key,
-      required this.pokemonDetail,
+      dynamic this.pokemonDetail,
       required this.color,
       required this.heroTag});
 
@@ -31,7 +34,7 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
         alignment: Alignment.center,
         children: [
           Positioned(
-            top: 80,
+            top: 30,
             left: 20,
             child: Text(
               widget.pokemonDetail['name'],
@@ -42,7 +45,7 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
             ),
           ),
           Positioned(
-              top: 120,
+              top: 70,
               left: 20,
               child: Container(
                 decoration: const BoxDecoration(
@@ -63,11 +66,11 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
                 ),
               )),
           Positioned(
-            top: mediaHeight * 0.18,
+            top: mediaHeight * 0.12,
             right: -60,
             child: Image.asset(
-              'asset/pokeball.png',
-              height: 200,
+              ProjectImage().pokeball,
+              height: 220,
               fit: BoxFit.fitHeight,
             ),
           ),
@@ -87,213 +90,15 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 50,
+                      height: 20,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: mediaWidth * 0.3,
-                              child: const Text(
-                                'Name',
-                                style: TextStyle(
-                                    color: Colors.blueGrey, fontSize: 18),
-                              )),
-                          Container(
-                              child: Text(
-                            widget.pokemonDetail['name'],
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: mediaWidth * 0.3,
-                              child: const Text(
-                                'Height',
-                                style: TextStyle(
-                                    color: Colors.blueGrey, fontSize: 18),
-                              )),
-                          Container(
-                              child: Text(
-                            widget.pokemonDetail['height'],
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: mediaWidth * 0.3,
-                              child: const Text(
-                                'Weight',
-                                style: TextStyle(
-                                    color: Colors.blueGrey, fontSize: 18),
-                              )),
-                          Container(
-                              child: Text(
-                            widget.pokemonDetail['weight'],
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: mediaWidth * 0.3,
-                              child: const Text(
-                                'Spawn Time',
-                                style: TextStyle(
-                                    color: Colors.blueGrey, fontSize: 18),
-                              )),
-                          Container(
-                              child: Text(
-                            widget.pokemonDetail['spawn_time'],
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: mediaWidth * 0.3,
-                              child: const Text(
-                                'Weakness',
-                                style: TextStyle(
-                                    color: Colors.blueGrey, fontSize: 18),
-                              )),
-                          Container(
-                              child: Text(
-                            widget.pokemonDetail['weaknesses'].join(', '),
-                            style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
-                          )),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: mediaWidth * 0.3,
-                              child: const Text(
-                                'Pre Form',
-                                style: TextStyle(
-                                    color: Colors.blueGrey, fontSize: 16),
-                              )),
-                          widget.pokemonDetail['prev_evolution'] != null
-                              ? SizedBox(
-                                  height: 20,
-                                  width: mediaWidth * 0.50,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: widget
-                                        .pokemonDetail['prev_evolution'].length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 8),
-                                        child: Text(
-                                          widget.pokemonDetail['prev_evolution']
-                                              [index]['name'],
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      );
-                                    },
-                                  ))
-                              : const Text(
-                                  'Just Hatched',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                              width: mediaWidth * 0.3,
-                              child: const Text(
-                                'Evolution',
-                                style: TextStyle(
-                                    color: Colors.blueGrey, fontSize: 16),
-                              )),
-                          widget.pokemonDetail['next_evolution'] != null
-                              ? SizedBox(
-                                  height: 20,
-                                  width: mediaWidth * 0.50,
-                                  child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: widget
-                                        .pokemonDetail['next_evolution'].length,
-                                    itemBuilder: (context, index) {
-                                      return Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 8),
-                                        child: Text(
-                                          widget.pokemonDetail['next_evolution']
-                                              [index]['name'],
-                                          style: const TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      );
-                                    },
-                                  ))
-                              : const Text(
-                                  'Maxed Out',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                        ],
-                      ),
-                    ),
+                    detailData(mediaWidth, 'Name', 'name'),
+                    detailData(mediaWidth, 'Height', 'height'),
+                    detailData(mediaWidth, 'Weight', 'weight'),
+                    detailData(mediaWidth, 'Spawn Time', 'spawn_time'),
+                    detailData(mediaWidth, 'Weakness', 'weaknesses'),
+                    detailData(mediaWidth, 'Pre Form', 'prev_evolution'),
+                    detailData(mediaWidth, 'Evolution', 'next_evolution'),
                   ],
                 ),
               ),
@@ -315,4 +120,77 @@ class _PokemonDetailScreenState extends State<PokemonDetailScreen> {
       ),
     );
   }
+
+  Padding detailData(double mediaWidth, String text, dynamic data) {
+    var onur;
+    String maxed;
+    if (data != 'weaknesses') {
+      onur = widget.pokemonDetail[data];
+    } else {
+      onur = widget.pokemonDetail[data].join(', ');
+    }
+
+    if (data == 'next_evolution' || data == 'prev_evolution') {
+      data == 'next_evolution' ? maxed = 'Maxed Out' : maxed = 'Just Hatched';
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          margin: EdgeInsets.zero,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: mediaWidth * 0.3, child: textss(text, false)),
+              widget.pokemonDetail[data] != null
+                  ? SizedBox(
+                      height: 20,
+                      width: mediaWidth * 0.50,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.pokemonDetail[data].length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: textss(
+                                widget.pokemonDetail[data][index]['name'],
+                                true),
+                          );
+                        },
+                      ))
+                  : textss(maxed, true),
+            ],
+          ),
+        ),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Card(
+          margin: EdgeInsets.zero,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SizedBox(width: mediaWidth * 0.3, child: textss(text, false)),
+              Container(child: textss(onur, true)),
+            ],
+          ),
+        ),
+      );
+    }
+  }
+
+  Text textss(String text, bool isbold) {
+    var stylex;
+    isbold == true
+        ? stylex = const TextStyle(
+            color: Colors.black, fontSize: 15, fontWeight: FontWeight.bold)
+        : stylex = const TextStyle(color: Colors.blueGrey, fontSize: 15);
+    return Text(
+      text,
+      style: stylex,
+    );
+  }
+}
+
+class ProjectImage {
+  final pokeball = 'asset/pokeball.png';
 }
