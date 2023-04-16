@@ -2,21 +2,21 @@
   {
     "id": 1,
     "num": "001",
-    "name": "Bulbasaur1",
+    "name": "Bulbasaur11",
     "candy": "candy1",
     "type": "Grass1"
   },
   {
     "id": 2,
     "num": "002",
-    "name": "Bulbasaur2",
+    "name": "Bulbasaur21",
     "candy": "candy2",
     "type": "Grass2"
   },
   {
     "id": 3,
     "num": "001",
-    "name": "Bulbasaur3",
+    "name": "Bulbasaur31",
     "candy": "candy3",
     "type": "Grass3"
   }
