@@ -2,16 +2,19 @@
   {
     "id": 1,
     "num": "001",
-    "name": "Bulbasaur1"
+    "name": "Bulbasaur1",
+    "type": "Grass1"
   },
   {
     "id": 2,
     "num": "002",
-    "name": "Bulbasaur2"
+    "name": "Bulbasaur2",
+    "type": "Grass2"
   },
   {
     "id": 3,
     "num": "001",
-    "name": "Bulbasaur3"
+    "name": "Bulbasaur3",
+    "type": "Grass3"
   }
 ]
