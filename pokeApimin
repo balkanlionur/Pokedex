@@ -1,0 +1,16 @@
+[{
+    "id": 1,
+    "num": "001",
+    "name": "Bulbasaur"
+   
+  }, {
+    "id": 2,
+    "num": "002",
+    "name": "Ivysaur"
+    
+  }, {
+    "id": 3,
+    "num": "003",
+    "name": "Venusaur",
+   
+  }]
